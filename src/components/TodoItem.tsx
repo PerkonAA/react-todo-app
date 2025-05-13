@@ -27,6 +27,7 @@ const BaseButton = styled.button`
     border-radius: 4px;
     cursor: pointer;
     color: white;
+    margin: 0 8px;
 `;
 
 export const DeleteButton = styled(BaseButton)`
@@ -80,7 +81,12 @@ const TodoItem: React.FC<TodoItemProps> = ({todo, deleteTodo, toggleTodo, editTo
                 </>
             ) : (
                 <>
-                    <TodoText completed={todo.completed}>
+                    <TodoText
+                        completed={todo.completed}
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => toggleTodo(todo.id)}
+                        title='Toggle'
+                    >
                         {todo.text}
                     </TodoText>
                     <EditButton onClick={() => setIsEditing(true)}>
