@@ -1,4 +1,5 @@
 import type {ITodo} from "../types";
+import React from "react";
 
 interface TodoItemProps {
     todo: ITodo;
@@ -26,4 +27,4 @@ const TodoItem: React.FC<TodoItemProps> = ({todo, deleteTodo, toggleTodo}) => {
     );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
