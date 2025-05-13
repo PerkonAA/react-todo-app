@@ -22,6 +22,11 @@ const App: React.FC = () => {
     }, [todos])
 
     const addTodo = (text: string) => {
+        if (text.trim() === '') {
+            alert('Task cannot be empty');
+            return;
+        }
+
         dispatch({
             type: 'ADD_TODO',
             payload: {
