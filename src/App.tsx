@@ -41,6 +41,10 @@ const App: React.FC = () => {
         dispatch({ type: 'REMOVE_TODO', payload: id });
     }
 
+    const editTodo = (id: number) => {
+        dispatch({ type: 'EDIT_TODO', payload: id });
+    }
+
     const toggleTodo = (id: number) => {
         dispatch({ type: 'TOGGLE_TODO', payload: id });
     }
@@ -67,6 +71,7 @@ const App: React.FC = () => {
                         todos={filteredTodos}
                         deleteTodo={deleteTodo}
                         toggleTodo={toggleTodo}
+                        editTodo={editTodo}
                     />
                 </Suspense>
             )}

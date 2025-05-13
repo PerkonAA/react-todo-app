@@ -11,4 +11,5 @@ export type TFilter = typeof FILTERS[keyof typeof FILTERS];
 export type Action =
     | { type: 'ADD_TODO'; payload: ITodo }
     | { type: 'REMOVE_TODO'; payload: number }
+    | { type: 'EDIT_TODO'; payload: number }
     | { type: 'TOGGLE_TODO'; payload: number };
