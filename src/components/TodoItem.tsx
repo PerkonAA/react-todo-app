@@ -1,12 +1,12 @@
 import type {ITodo} from "../types";
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 interface TodoItemProps {
     todo: ITodo;
     deleteTodo: (id: number) => void;
     toggleTodo: (id: number) => void;
-    editTodo: (id: number) => void;
+    editTodo: (id: number, text: string) => void;
 }
 
 // Стили
@@ -45,7 +45,23 @@ export const EditButton = styled(BaseButton)`
     }
 `;
 
+export const SaveButton = styled(BaseButton)`
+    background-color: #28a745;
+    
+    &:hover {
+        background-color: #218838;
+    }
+`;
+
 const TodoItem: React.FC<TodoItemProps> = ({todo, deleteTodo, toggleTodo, editTodo}) => {
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [newText, setNewText] = useState<string>('');
+
+    const handleEdit = () => {
+        editTodo(todo.id, newText);
+        setIsEditing(false);
+    }
+
     return (
         <TodoContainer>
             <input
@@ -53,12 +69,26 @@ const TodoItem: React.FC<TodoItemProps> = ({todo, deleteTodo, toggleTodo, editTo
                 checked={todo.completed}
                 onChange={() => toggleTodo(todo.id)}
             />
-            <TodoText completed={todo.completed}>
-                {todo.text}
-            </TodoText>
-            <EditButton onClick={() => editTodo(todo.id)}>
-                Edit
-            </EditButton>
+
+            {isEditing ? (
+                <>
+                    <input type="text"
+                        value={newText}
+                        onChange={(e) => setNewText(e.target.value)}
+                    />
+                    <SaveButton onClick={handleEdit}>Save</SaveButton>
+                </>
+            ) : (
+                <>
+                    <TodoText completed={todo.completed}>
+                        {todo.text}
+                    </TodoText>
+                    <EditButton onClick={() => setIsEditing(true)}>
+                        Edit
+                    </EditButton>
+                </>
+            )}
+
             <DeleteButton onClick={() => deleteTodo(todo.id)}>
                 Delete
             </DeleteButton>

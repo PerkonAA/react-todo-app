@@ -41,8 +41,8 @@ const App: React.FC = () => {
         dispatch({ type: 'REMOVE_TODO', payload: id });
     }
 
-    const editTodo = (id: number) => {
-        dispatch({ type: 'EDIT_TODO', payload: id });
+    const editTodo = (id: number, newTitle: string) => {
+        dispatch({ type: 'EDIT_TODO', payload: {id, text: newTitle} });
     }
 
     const toggleTodo = (id: number) => {
